@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %} List of books {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+{#            <div class="col-md-4">#}
+{#                <div class="card">#}
+{#                    <div class="card-header">#}
+{#                        <h3 class="text-center">Filters</h3>#}
+{#                    </div>#}
+{#                    <form method="get">#}
+{#                        <div class="card-body">#}
+{#                            {{ my_filter.form.as_p }}#}
+{#                        </div>#}
+{#                        <div class="card-footer text-center">#}
+{#                            <button type="submit" class="btn btn-success">Search</button>#}
+{#                            <a href="{% url 'list_of_books' %}" class="btn btn-danger">Reset</a>#}
+{#                        </div>#}
+{#                    </form>#}
+{#                </div>#}
+{#            </div>#}
+
+            <div class="col-md-8">
+                {% if all_books %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Author 1</th>
+                            <th>Author 2</th>
+                            <th>Editorial</th>
+                            <th>City</th>
+                            <th>Publish Year</th>
+                            <th>Collection</th>
+                            <th class="pull-right">More</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for book in all_books %}
+                            <tr>
+                                <td>{{ book.book_name }}</td>
+                                <td>{{ book.author1 }}</td>
+                                <td>{{ book.author2 }}</td>
+                                <td>{{ book.editorial }}</td>
+                                <td>{{ book.editorial_city }}</td>
+                                <td>
+                                    {% if book.has_publish_date is True %}
+                                        {{ book.publish_date|date:"Y" }}
+                                    {% else %}
+                                        Unknown
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if book.is_collection is True %}
+                                        {{ book.collection }}
+                                    {% else %}
+                                        Individual publish
+                                    {% endif %}
+                                </td>
+
+                                <td>{{ book.updated_at|date:"d-m-Y H:i:s" }}</td>
+
+                                <td class="pull-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+
+                                        </button>
+                                            <ul class="dropdown-menu">
+{##}
+{#                                                {% if perms.book.update_book %}#}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'update_book' book.id %}">Update</a></li>
+{#                                                {% endif %}#}
+{#                                                {% if perms.book.delete_book %}#}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'delete_book' book.id %}">Delete</a></li>
+{#                                                {% endif %}#}
+{#                                                {% if perms.book.delete_book %}#}
+                                                    <li>
+                                                        <button type="button" class="dropdown-item"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#book_{{ book.id }}">
+                                                            Delete(modal)
+                                                        </button>
+                                                    </li>
+{#                                                {% endif %}#}
+{#                                                {% if perms.book.view_book %}#}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'details_book' book.id %}">View
+                                                        Details</a>
+                                                    </li>
+{#                                                {% endif %}#}
+                                            </ul>
+{#                                        {% endif %}#}
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="book_{{ book.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                Delete-{{ book }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete the following book: {{ book }} by {{ author1 }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No
+                                            </button>
+                                            <a href="{% url 'delete_book_by_modal' book.id %}"
+                                               class="btn btn-danger">Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <br><br>
+                    <h3 class="text-center">No data available</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
