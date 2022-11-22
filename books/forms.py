@@ -7,8 +7,8 @@ from books.models import Book
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'has_publish_date', 'publish_date',
-                  'publish_date', 'is_collection', 'collection', 'needs_details', 'description']
+        fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date',
+                  'publish_date', 'collection', 'needs_details', 'description']
         widgets = {
             'book_name': TextInput(attrs={'placeholder': 'Place title of book', 'class': 'form-control'}),
             'author1': TextInput(attrs={'placeholder': 'Enter name of author', 'class': 'form-control'}),
@@ -17,9 +17,7 @@ class BookForm(forms.ModelForm):
             'editorial': TextInput(attrs={'placeholder': 'Enter the editorial company name', 'class': 'form-control'}),
             'editorial_city': TextInput(
                 attrs={'placeholder': 'Add the city of the company (if known)', 'class': 'form-control'}),
-            'has_publish_date': CheckboxInput,
-            'publish_date': NumberInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'year'}),
-            'is_collection': Select(attrs={'class': 'form-select'}),
+            'publish_date': NumberInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'number'}),
             'collection': TextInput(attrs={'placeholder': 'Insert collection name', 'class': 'form_control'}),
             'needs_details': CheckboxInput,
             'description': Textarea(
@@ -63,8 +61,8 @@ class BookForm(forms.ModelForm):
 class BookUpdateForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'has_publish_date', 'publish_date',
-                  'publish_date', 'is_collection', 'collection', 'needs_details', 'description']
+        fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date',
+                  'publish_date', 'collection', 'needs_details', 'description']
         widgets = {
             'book_name': TextInput(attrs={'placeholder': 'Place title of book', 'class': 'form-control'}),
             'author1': TextInput(attrs={'placeholder': 'Enter name of author', 'class': 'form-control'}),
@@ -73,9 +71,7 @@ class BookUpdateForm(forms.ModelForm):
             'editorial': TextInput(attrs={'placeholder': 'Enter the editorial company name', 'class': 'form-control'}),
             'editorial_city': TextInput(
                 attrs={'placeholder': 'Add the city of the company (if known)', 'class': 'form-control'}),
-            'has_publish_date': Select(attrs={'class': 'form-select'}),
             'publish_date': TextInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'year'}),
-            'is_collection': Select(attrs={'class': 'form-select'}),
             'collection': TextInput(attrs={'placeholder': 'Insert collection name', 'class': 'form_control'}),
             'needs_details': Select(attrs={'class': 'form-select'}),
             'description': Textarea(
@@ -112,6 +108,5 @@ class BookUpdateForm(forms.ModelForm):
         if has_publish_date is True and publishcheck[0].islower():
             msg = 'Mush add date if you toggled publish date'
             self._errors['last_name'] = self.error_class([msg])
-
 
         return cleaned_data
