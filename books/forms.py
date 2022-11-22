@@ -1,6 +1,6 @@
 from django import forms
-from django.forms import TextInput, Select, Textarea, DateInput
-
+from django.forms import TextInput, Select, Textarea, DateInput, BooleanField
+from django.forms.widgets import CheckboxInput, NumberInput
 from books.models import Book
 
 
@@ -17,11 +17,11 @@ class BookForm(forms.ModelForm):
             'editorial': TextInput(attrs={'placeholder': 'Enter the editorial company name', 'class': 'form-control'}),
             'editorial_city': TextInput(
                 attrs={'placeholder': 'Add the city of the company (if known)', 'class': 'form-control'}),
-            'has_publish_date': Select(attrs={'class': 'form-select'}),
-            'publish_date': TextInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'year'}),
+            'has_publish_date': CheckboxInput,
+            'publish_date': NumberInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'year'}),
             'is_collection': Select(attrs={'class': 'form-select'}),
             'collection': TextInput(attrs={'placeholder': 'Insert collection name', 'class': 'form_control'}),
-            'needs_details': Select(attrs={'class': 'form-select'}),
+            'needs_details': CheckboxInput,
             'description': Textarea(
                 attrs={'placeholder': 'Please enter your description', 'class': 'form-control', 'rows': 4})
 
