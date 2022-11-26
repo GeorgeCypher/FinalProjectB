@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 
+from books.filters import BookFilter
 from books.forms import BookUpdateForm, BookForm
 from books.models import Book
 
@@ -15,8 +16,23 @@ class BookCreateView(CreateView):
 class BookListView(ListView):
     template_name = 'books\list_of_books.html'
     model = Book
-
     context_object_name = 'all_books'
+
+    def get_queryset(self):
+        return Book.objects.all().order_by('book_name')
+
+    def get_context_data(self, **kwargs):
+        data = super(BookListView, self).get_context_data(**kwargs)
+        # data['trainers'] = Trainer.objects.all()
+
+        books = Book.objects.all()
+        myFilter = BookFilter(self.request.GET, queryset=books)
+        books = myFilter.qs
+
+        data['all_books'] = books
+        data['my_filter'] = myFilter
+
+        return data
 
 
 class BookUpdateView(UpdateView):
