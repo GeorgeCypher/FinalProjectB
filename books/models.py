@@ -10,12 +10,11 @@ class Book(models.Model):
     editorial = models.CharField(max_length=200)
     editorial_city = models.CharField(max_length=50)
     publish_date = models.IntegerField()
-    collection = models.CharField(max_length=100)
-    needs_details = models.BooleanField(default=False)
-    description = models.TextField(max_length=300)
-    # needs to add attachments of cover and of pdf
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    collection = models.CharField(max_length=100, null=True)
+    description = models.TextField(max_length=300, null=True)
+    # # needs to add attachments of cover and of pdf
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.book_name} by {self.author1}'
