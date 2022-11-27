@@ -9,4 +9,11 @@ urlpatterns = [
     path('delete-book/<int:pk>/', views.BookDeleteView.as_view(), name='delete_book'),
     path('delete-book-by-modal/<int:pk>/', views.delete_book_by_modal, name='delete_book_by_modal'),
     path('details-book/<int:pk>', views.BookDetailView.as_view(), name='details_book')
+
+    # path('books/upload/', views.upload_book, name='upload_book'),
+    # path('books/<int:pk>/', views.delete_book, name='delete_book'),
+    #
+    # path('class/books/', views.BookListView.as_view(), name='class_book_list'),
+    # path('class/books/upload/', views.UploadBookView.as_view(), name='class_upload_book'),
+
 ]

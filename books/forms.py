@@ -1,14 +1,18 @@
 from django import forms
-from django.forms import TextInput, Select, Textarea, DateInput, BooleanField
+from django.forms import TextInput, Select, Textarea, DateInput, BooleanField, FileInput
 from django.forms.widgets import CheckboxInput, NumberInput
 from books.models import Book
+from django import forms
 
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
 
 class BookForm(forms.ModelForm):
+    file= forms.FileField
     class Meta:
         model = Book
         fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date', 'collection',
-                  'description']
+                  'description', 'upload_file']
 
         # fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date',
         #           'publish_date', 'collection', 'needs_details', 'description']
@@ -23,8 +27,8 @@ class BookForm(forms.ModelForm):
             'publish_date': NumberInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'number'}),
             'collection': TextInput(attrs={'placeholder': 'Insert collection name', 'class': 'form_control'}),
             'description': Textarea(
-                attrs={'placeholder': 'Please enter your description', 'class': 'form-control', 'rows': 4})
-
+                attrs={'placeholder': 'Please enter your description', 'class': 'form-control', 'rows': 4}),
+            'upload_file': FileInput()
         }
 
     # needs to add attachments of cover and of pdf
@@ -58,7 +62,7 @@ class BookUpdateForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date', 'collection',
-                  'description']
+                  'description', 'upload_file']
 
         # fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date',
         #           'publish_date', 'collection', 'needs_details', 'description']
@@ -73,7 +77,8 @@ class BookUpdateForm(forms.ModelForm):
             'publish_date': NumberInput(attrs={'placeholder': 'year', 'class': 'form-control', 'type': 'number'}),
             'collection': TextInput(attrs={'placeholder': 'Insert collection name', 'class': 'form_control'}),
             'description': Textarea(
-                attrs={'placeholder': 'Please enter your description', 'class': 'form-control', 'rows': 4})
+                attrs={'placeholder': 'Please enter your description', 'class': 'form-control', 'rows': 4}),
+            'upload_file': FileInput()
 
         }
         # fields = ['book_name', 'author1', 'author2', 'editorial', 'editorial_city', 'publish_date',
