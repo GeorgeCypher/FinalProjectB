@@ -4,14 +4,15 @@ class Book(models.Model):
 
     # gender_options = (('male', 'Male'), ('female', 'Female'))
 
-    book_name = models.CharField(max_length=100)
-    author1 = models.CharField(max_length=100)
-    author2 = models.CharField(max_length=100)
-    editorial = models.CharField(max_length=200)
-    editorial_city = models.CharField(max_length=50)
-    publish_date = models.IntegerField()
-    collection = models.CharField(max_length=100, null=True)
-    description = models.TextField(max_length=300, null=True)
+    book_name = models.CharField(max_length=100, null=True, blank=True)
+    author1 = models.CharField(max_length=100, null=True, blank=True)
+    author2 = models.CharField(max_length=100, null=True, blank=True)
+    editorial = models.CharField(max_length=200, null=True, blank=True)
+    editorial_city = models.CharField(max_length=50, null=True, blank=True)
+    publish_date = models.IntegerField(null=True, blank=True)
+    collection = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(max_length=300, null=True, blank=True)
+    upload_file = models.FileField(null=True, blank=True, upload_to='documents/')
     # # needs to add attachments of cover and of pdf
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now_add=True)
