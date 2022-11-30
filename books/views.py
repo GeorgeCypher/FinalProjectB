@@ -6,37 +6,11 @@ from django.urls import reverse_lazy
 from books.filters import BookFilter
 from books.forms import BookUpdateForm, BookForm
 from books.models import Book
-
+from django.http import FileResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # from .forms import UploadFileForm
 
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
-
-# Imaginary function to handle an uploaded file.
-# from books import handle_uploaded_file
-
-def upload(request):
-    context = {}
-    if request.method == 'POST':
-        uploaded_file = request.FILES['document']
-        fs = FileSystemStorage()
-        name = fs.save(uploaded_file.name, uploaded_file)
-        context['url'] = fs.url(name)
-    return render(request, 'uploads/upload.html', context)
-
-def model_form_upload(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        file = request.FILES['file']
-        book_view = Book.objects.create(upload_file=file)
-        return render("The document is " + str(file))
-    else:
-        form = BookForm()
-    return render(request, 'books/add_book.html', {'form': form})
 
 class BookCreateView(CreateView):
     template_name = 'books/add_book.html'

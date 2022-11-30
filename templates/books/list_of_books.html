@@ -51,7 +51,8 @@
                                     Unknown
                                 {% endif %}
                             </td>
-                            <td>{{ book.collection }}                        </td>
+                            <td>{{ book.collection }}
+                            </td>
 
                             <td>{{ book.updated_at|date:"d-m-Y H:i:s" }}</td>
 
@@ -62,6 +63,8 @@
 
                                     </button>
                                     <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="\uploads\{{ book.upload_file }}">
+                                            Download File...</a></li>
                                         {##}
                                         {#                                                {% if perms.book.update_book %}#}
                                         <li><a class="dropdown-item"

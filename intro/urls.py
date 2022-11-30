@@ -3,4 +3,5 @@ from intro.views import HomeTemplateView
 
 urlpatterns = [
     path('', HomeTemplateView.as_view(), name='homepage')
+
 ]
