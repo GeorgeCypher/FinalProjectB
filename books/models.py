@@ -12,7 +12,7 @@ class Book(models.Model):
     publish_date = models.IntegerField(max_length=4, null=True, blank=True)
     collection = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(max_length=300, null=True, blank=True)
-    upload_file = models.FileField(null=True, blank=True, upload_to='media/uploads')
+    upload_file = models.FileField(null=True, blank=True, upload_to='')
     # # needs to add attachments of cover and of pdf
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now_add=True)

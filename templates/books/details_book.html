@@ -21,7 +21,7 @@
 
                         <p class="card-text">Description: {{ book.description }}</p>
 
-                        <a href="\uploads\{{ book.upload_file }}" download class="btn btn-primary">Download File...</a>
+                        <a href="\media\{{ book.upload_file }}" download class="btn btn-primary">Download File...</a>
                         <a href="{% url 'list_of_books' %}" class="btn btn-primary">Cancel</a>
                     </div>
                     <div class="card-footer text-muted">

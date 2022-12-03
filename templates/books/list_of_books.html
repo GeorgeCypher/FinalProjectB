@@ -33,6 +33,7 @@
                         <th>City</th>
                         <th>Publish Year</th>
                         <th>Collection</th>
+                        <th>File name</th>
                         <th class="pull-right">More</th>
                     </tr>
                     </thead>
@@ -44,15 +45,9 @@
                             <td>{{ book.author2 }}</td>
                             <td>{{ book.editorial }}</td>
                             <td>{{ book.editorial_city }}</td>
-                            <td>
-                                {% if book.has_publish_date is True %}
-                                    {{ book.publish_date|date:"Y" }}
-                                {% else %}
-                                    Unknown
-                                {% endif %}
-                            </td>
-                            <td>{{ book.collection }}
-                            </td>
+                            <td>{{ book.publish_date }}</td>
+                            <td>{{ book.collection }}</td>
+                            <td>{{ book.upload_file }}</td>
 
                             <td>{{ book.updated_at|date:"d-m-Y H:i:s" }}</td>
 
@@ -63,8 +58,8 @@
 
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="\uploads\{{ book.upload_file }}">
-                                            Download File...</a></li>
+                                        <li><a class="dropdown-item" href="\media\{{ book.upload_file }}">
+                                            Preview File...</a></li>
                                         {##}
                                         {#                                                {% if perms.book.update_book %}#}
                                         <li><a class="dropdown-item"
